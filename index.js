@@ -6,8 +6,8 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const path = require("path");
 
-require("./server/DB/DB");
 require("dotenv").config();
+require("./server/DB/DB");
 
 const hbs = create({
   extname: ".hbs",
