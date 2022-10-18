@@ -2,9 +2,8 @@ const sql = require("mssql");
 const config = {
   host: "localhost",
   user: "proyecto-sql",
-  password: "valerie1234",
-  server: "LAPTOP-L4IOLGLJ",
-  database: "Users",
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
   options: {
     trustedconnection: false,
     enableArithAbort: true,

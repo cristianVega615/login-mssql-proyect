@@ -32,7 +32,6 @@ router.get("/userContact/", async (req, res, next) => {
     let valuesGet = await request.query(`SELECT * FROM contact WHERE id=${idUser}`, (err, result) => {
         if(err) {return next(err)}
 
-        console.log(result.recordset)
         res.json(result.recordset)
     })
     
