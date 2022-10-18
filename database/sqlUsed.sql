@@ -15,3 +15,4 @@ CREATE TABLE contact(
 	FOREIGN KEY (id)
 	REFERENCES info_users
 )
+SELECT * FROM contact where id="id de usuario"
