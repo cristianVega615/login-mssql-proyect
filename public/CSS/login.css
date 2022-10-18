@@ -1,0 +1,105 @@
+.login {
+  width: 80vw;
+  height: 70vh;
+  max-width: 33rem;
+  max-height: 37rem;
+  background: rgb(200, 119, 219);
+  background: linear-gradient(
+    0deg,
+    rgba(200, 119, 219, 1) 0%,
+    rgba(212, 100, 100, 1) 100%
+  );
+
+  border-radius: 10px 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+.log-title {
+  display: inline;
+}
+.fa-code {
+  font-size: 2.5rem;
+}
+.content-input {
+  width: 60vw;
+  height: 35vh;
+  max-width: 28rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-input {
+  width: 53vw;
+  max-width: 18rem;
+  margin: 0.8rem;
+  margin-bottom: 2.4rem;
+  position: relative;
+}
+.icon-input {
+  position: absolute;
+  width: 1.3rem;
+  height: 1rem;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.input-log {
+  font-size: 1.1rem;
+  width: 50vw;
+  max-width: 17.5rem;
+  height: 1.8rem;
+  background-color: inherit;
+  border: none;
+  border-bottom: solid 2px black;
+  margin-left: 0.5rem;
+  padding: 20px 25px;
+}
+.input-log::placeholder{
+    color: rgb(233, 215, 215);
+}
+.input-log:focus {
+  outline: none;
+}
+
+.submit{
+  width: 30vw;
+  max-width: 8.6rem;
+  height: 3rem;
+  margin: 0 auto;
+  border-radius: 50px;
+  border: none;
+}
+.submit:hover{
+  box-shadow: 4px 3px 6px black;
+  transition: all 0.6s ease-in-out;
+}
+.text-login{
+  margin-top: 0;
+}
+.a-login{
+  color: white;
+  outline: none;
+  text-decoration: none;
+}
+@media screen and (min-width: 45rem) {
+  /* .login{
+        display: none;
+    } */
+    .login-title{
+      margin-bottom: 3.6rem;
+    }
+}

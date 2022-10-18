@@ -1,0 +1,33 @@
+<div class="login">
+  <div class="login-title">
+    <i class="fa-solid fa-code"></i>
+    <h1 class="log-title">Login</h1>
+  </div>
+  <form action="/login" method="POST" class="form-login">
+    <div class="content-input">
+
+        <div class="login-input">
+          <i class="fa-solid fa-user icon-input"></i>
+          <input
+            type="text"
+            name="username"
+            autocomplete="off"
+            class="input-log"
+            placeholder="Username"
+          />
+        </div>
+        <div class="login-input">
+          <i class="fa-solid fa-lock icon-input"></i>
+          <input type="password" name="password"  placeholder="Password" class="input-log" />
+        </div>
+        <div class="login-input login-submit">
+          <input type="submit" class="submit" value="Log in"/>
+        </div>
+        <div class="login-input text-login">
+          <p>If you want to make up a new account,then, you insert your data here <a class="a-login" href="/signup">Sign up</a></p>
+        </div>
+
+    </div>
+  </form>
+
+</div>

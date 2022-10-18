@@ -1,0 +1,16 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  background: rgb(36, 30, 30);
+  background: radial-gradient(
+    circle,
+    rgba(36, 30, 30, 1) 0%,
+    rgba(26, 27, 29, 1) 52%,
+    rgba(31, 30, 30, 1) 100%
+  );
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
