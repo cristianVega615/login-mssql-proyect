@@ -28,8 +28,7 @@ router.get("/userContact/", async (req, res, next) => {
     let request = await BD.request();
     let idUser =  req.user.id
 
-    console.log(await req.user.id)
-    let valuesGet = await request.query(`SELECT * FROM contact WHERE id=${idUser}`, (err, result) => {
+    let valuesGet = await request.query(`SELECT nameContact, phoneNumber FROM contact WHERE id=${idUser}`, (err, result) => {
         if(err) {return next(err)}
 
         res.json(result.recordset)

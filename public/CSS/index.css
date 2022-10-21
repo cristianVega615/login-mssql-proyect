@@ -31,4 +31,5 @@ list-style: none;
     width: 40vw;
     height: 30rem;
     background-color: green;
+    overflow-y: scroll;
 }

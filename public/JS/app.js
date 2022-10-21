@@ -24,7 +24,6 @@ submit?.addEventListener("submit", (event)  => {
         result.value = ""
     })
         
-    console.log(arrayInputText)
     fetch("http://localhost:4000/contact", 
     {
         method: 'POST',
@@ -55,7 +54,30 @@ function getFetchContact(){
         
         return response.json()
     } )
-    .then(parse => console.log(parse))
+    .then(parse => printDivContact(parse))
     .catch(err => console.log(err))
     
+}
+
+
+function printDivContact(valueParse){
+
+    
+    if(infoContact.hasChildNodes()){
+        infoContact.innerHTML = "";
+    }
+    
+
+    $fragment = document.createDocumentFragment();
+    
+    valueParse.map(element => {
+        
+        const li = document.createElement("p");
+
+        li.textContent = `${element.nameContact}, ${element.phoneNumber} `;
+        $fragment.appendChild(li);
+    })
+
+
+    infoContact.appendChild($fragment)
 }
