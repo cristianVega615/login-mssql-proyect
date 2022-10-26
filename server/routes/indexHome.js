@@ -15,7 +15,6 @@ router.post("/", async (req, res, next) => {
 
     request.query(`INSERT INTO contact (id, nameContact, phoneNumber) VALUES('${idUser}', '${nameContact}', '${phoneNumber}')`, (err, result)=>{
         if(err) return next(err)
-
     }) 
 
     

@@ -1,6 +1,6 @@
 <nav class="nav-index-log">
   <div class="logo">
-    <p>HOla fdlksjafldjsaflkjsd</p>
+    <p>Contacto</p>
   </div>
 
   <div class="block-info-log">
@@ -21,14 +21,26 @@
 </nav>
 
 <main class="block-contact">
+  <div class="parent-contact">
     <div class="up-contact"> 
+      <div class="top-contact">
+        <div class="clock"></div>
+        <div class="status">
+          <img src="../resources/status.png" alt="">
+        </div>
+      </div>
+
+      <h2 class="title-form">Hello!</h2>
       <form action="/contact" method="POST" class="block-send">
-        <input type="text" class="input-text" name="nameContact" required>
-        <input type="text" maxlength="10" class="input-text" name="phoneNumber" required>
+        <input type="text" class="input-text" 
+        autocomplete="off" name="nameContact" required>
+        <input type="text" maxlength="10" onKeypress="validNumberInput(event)" class="input-text" 
+        autocomplete="off" name="phoneNumber"  required>
        <button class="send"> Enviar</button> 
       </form>
     </div>
     <div class="info-contact">
       
     </div>
+  </div>
 </main>
