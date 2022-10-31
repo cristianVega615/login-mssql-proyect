@@ -1,4 +1,4 @@
-let submit = document.querySelector(".block-send");
+let submit = document.querySelector(".send");
 let allInput = document?.querySelectorAll(".input-text");
 let infoContact = document.querySelector(".info-contact");
 let clock = document.querySelector(".clock");
@@ -12,9 +12,32 @@ window.addEventListener("DOMContentLoaded", (event) => {
     timeReal();
   }
 });
+document.addEventListener("click", event => {
+
+  if(event.target.matches(".btn-update *")){
+
+    crudElection(event)
+  }
+
+  if(event.target.matches(".btn-delete *")){
+    //We delete a node del document we are using event delegation.
+
+
+    crudElection(event)
+
+    let buttonParent = event.target.parentNode;
+    let parentDiv = (buttonParent.parentNode).getAttribute("class");
+    let nodeChild = document.querySelector(`.${parentDiv}`)
+
+    buttonParent.parentNode.parentNode.removeChild(nodeChild)
+
+    
+
+  }
+}) 
 
 /*POST Block contact*/
-submit?.addEventListener("submit", (event) => {
+submit?.addEventListener("click", async (event) => {
   event.preventDefault();
 
   let arrayInputText = Array.from(allInput).map((result) => result.value);
@@ -25,19 +48,25 @@ submit?.addEventListener("submit", (event) => {
     result.value = "";
   });
 
-  fetch("http://localhost:4000/contact", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      nameContact: nameContact,
-      phoneNumber: phoneNumber,
-    }),
-  });
+  try {
+    fetch("http://localhost:4000/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nameContact: nameContact,
+        phoneNumber: phoneNumber,
+      }),
+    });
+  
+    //Each time that you send one contact, this will be redner whitin the node info-contact.
+    getFetchContact();
+    
+  } catch (error) {
+    console.log(error) 
+  }
 
-  //Each time that you send one contact, this will be redner whitin the node info-contact.
-  getFetchContact();
 });
 
 function getFetchContact() {
@@ -60,14 +89,14 @@ function printDivContact(valueParse) {
 
   $fragment = document.createDocumentFragment();
 
-  valueParse.map((element) => {
+  valueParse.map((element, key) => {
     const li = document.createElement("div");
+    li.classList.add(`div-${key}`);
 
-
-
-    li.innerHTML = `<p>${element.nameContact}, ${element.phoneNumber} </p> 
-    <button class="btn-i"><i class="fa-solid fa-pen"></i></button>
-    <button class="btn-i"><i class="fa-solid fa-trash"></i></button> 
+    li.innerHTML = `<p class="nameContact">${element.nameContact}</p> 
+    <p class="numberPhone">${element.phoneNumber}</p>
+    <button class="btn-update"><i class="fa-solid fa-pen"></i></button>
+    <button class="btn-delete"><i class="fa-solid fa-trash"></i></button> 
     `;
 
     $fragment.appendChild(li);
@@ -101,7 +130,38 @@ function timeReal() {
 function validNumberInput(event){
   if ((event.keyCode < 47 || event.keyCode > 57) && event.keyCode != 13){
     event.returnValue = false;
-    console.log(event.keyCode)
+  }
+
+
+}
+
+
+async function crudElection (event){
+  
+  try {
+    let name = document.querySelector(".nameContact").textContent;
+    let phone = document.querySelector(".numberPhone").textContent;
+    let urlPart;
+  
+    if(event.target.matches(".btn-update *")){
+      urlPart = "update"
+    }
+    if(event.target.matches(".btn-delete *")){
+      urlPart = "delete";
+    }
+    fetch(`http://localhost:4000/contact/${urlPart}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nameContact: name,
+        phoneNumber: phone,
+      }),
+    });
+    
+  } catch (error) {
+    console.log(error)
   }
 
 

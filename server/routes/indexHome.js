@@ -25,7 +25,7 @@ router.post("/", async (req, res, next) => {
 router.get("/userContact/", async (req, res, next) => {
     let BD = await bdConect();
     let request = await BD.request();
-    let idUser =  req.user.id
+    let idUser =  req.user?.id || 0
 
     let valuesGet = await request.query(`SELECT nameContact, phoneNumber FROM contact WHERE id=${idUser}`, (err, result) => {
         if(err) {return next(err)}
@@ -37,5 +37,19 @@ router.get("/userContact/", async (req, res, next) => {
 
 })
 
+router.post("/delete", async (req,res, next) => {
+    let BD = await bdConect()
+    let {nameContact, numberPhone} = req.body;
+    let request = await BD.request();
+    let idUser = req.user?.id || 0
+    
+    console.log(req.body)
+    let valuesGet = await request.query(`DELETE FROM contact WHERE id='${idUser}' AND nameContact='${nameContact}'`, (err, result) => {
+        if(err) {return next(err)}
+    })
+    
+
+
+})
 
 module.exports = router

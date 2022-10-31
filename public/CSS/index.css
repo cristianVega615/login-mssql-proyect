@@ -103,7 +103,8 @@
 .info-contact {
   width: 40vw;
   min-width: 20rem;
-  height: 30rem;
+  max-width: 40rem;
+  height: 41rem;
   padding: 1.3rem;
   border: 2px solid rgb(163, 253, 253);
   overflow-y: auto;
