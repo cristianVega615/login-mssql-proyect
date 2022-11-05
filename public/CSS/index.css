@@ -65,6 +65,8 @@
   margin-bottom: 3rem;
 }
 
+
+
 .block-send > .input-text {
   height: 2rem;
   font-size: 1.2rem;
@@ -81,8 +83,11 @@
   background-color: inherit;
 }
 .send {
-  width: 3rem;
-  height: 1rem;
+  width: 5.3rem;
+  height: 2.3rem;
+  border-radius: 10px;
+  font-weight: bold;
+  
 }
 
 .block-contact {
