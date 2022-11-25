@@ -9,6 +9,7 @@ SELECT * FROM info_users
 
 CREATE TABLE contact(
 	id int FOREIGN KEY REFERENCES info_users,
+	div_content int,
 	nameContact varchar(40),
 	phoneNumber char(10),
 	CONSTRAINT  fk_id_user

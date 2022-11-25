@@ -1,19 +1,69 @@
-.parent-contact{
-  font-family: 'Helvetica Neue', sans-serif;
+.parent-contact {
+  font-family: "Helvetica Neue", sans-serif;
   color: white;
 }
 .nav-index-log {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   color: black;
   text-decoration: none;
 }
-.nav-index-log > * {
-  padding: 0 2.5rem;
+.nav_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.3rem;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.nav_inner {
+  font-size: 1rem;
+  position: absolute;
+  top: 3.4rem;
+  left: 3rem;
+  width: max-content;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1.2rem;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  text-align: center;
+}
+
+.nav_inner-show {
+  opacity: 1;
+  pointer-events: unset;
+}
+.sign_out {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.2rem 0.5rem;
+  background-color: white;
 }
 .user-id {
   display: inline;
+  padding: 0 0.8rem;
+  cursor: pointer;
+}
+.nav_drop {
+  margin: 1rem 0;
+  color: rgb(18, 17, 17);
+}
+
+.account {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-index-log > * {
+  padding: 0 2.5rem;
 }
 .block-info-log > ul {
   display: flex;
@@ -24,6 +74,7 @@
 
 .block-contact {
   display: flex;
+  flex-wrap: wrap;
 }
 /*style iphone*/
 .up-contact {
@@ -45,8 +96,7 @@
 /* main block*/
 /*Form of contact*/
 
-.title-form{
-
+.title-form {
   font-size: 3.4rem;
   text-align: center;
 }
@@ -64,8 +114,6 @@
 .block-send > * {
   margin-bottom: 3rem;
 }
-
-
 
 .block-send > .input-text {
   height: 2rem;
@@ -87,26 +135,25 @@
   height: 2.3rem;
   border-radius: 10px;
   font-weight: bold;
-  
 }
 
 .block-contact {
   width: 100%;
-  height: 90%;
+  height: 88%;
   margin: 0 auto;
   position: relative;
 }
 .parent-contact {
   position: absolute;
   display: flex;
-  top: 50%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 /* information contact*/
 .info-contact {
-  width: 40vw;
+  width: 30vw;
   min-width: 20rem;
   max-width: 40rem;
   height: 41rem;
@@ -118,12 +165,10 @@
   color: black;
 }
 
-.fa-delete-left{
+.fa-delete-left {
   width: 3rem;
   height: 1.7rem;
 }
-
-
 
 /*scroll edit*/
 .info-contact::-webkit-scrollbar {
@@ -153,10 +198,12 @@
 }
 
 @media screen and (max-width: 46.125rem) {
-  .up-contact {
-    display: none;
+  .parent-contact{
+    flex-direction: column;
+    top:720;
+
   }
-  .info-contact{
-    margin-left: 0;
+  .info-contact {
+    margin: 0 auto;
   }
 }

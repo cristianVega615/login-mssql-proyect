@@ -4,14 +4,19 @@
   </div>
 
   <div class="block-info-log">
-      <ul>
-        <li>
+      <ul class="nav_menu">
+        <li class="nav_item">
           <i class="fa-solid fa-user"></i>
-          <p class="user-id">{{user}}</p>
-          <ul>
-            <li>
+          <span class="user-id">{{user}}
+          <img src="./resources/icon-arrow-down.svg" alt="">
+          </span>
+          <ul class="nav_inner">
+            <li class="nav_drop">
+            <a href="#" class="account">My account</a>
+            </li>
+            <li class="nav_drop">
               <form action="/login/logout" method="POST">
-                <button type="submit"> Sign out</button>
+                <button type="submit" class="sign_out"> Sign out</button>
               </form>
             </li>
           </ul>

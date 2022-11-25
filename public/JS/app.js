@@ -3,9 +3,12 @@ let allInput = document?.querySelectorAll(".input-text");
 let infoContact = document.querySelector(".info-contact");
 let clock = document.querySelector(".clock");
 
-window.addEventListener("DOMContentLoaded", (event) => {
+window.addEventListener("DOMContentLoaded",  async(event) => {
   if (infoContact) {
-    getFetchContact();
+    
+    let getValues = await fetch("http://localhost:4000/contact/userContact");
+    let valueArray = await getValues.json();
+    getFetchContact(valueArray);
   }
 
   if (clock) {
@@ -16,28 +19,49 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 let data = null;
 document.addEventListener("click", (event) => {
-  let name = document.querySelector(".nameContact");
-  let phone = document.querySelector(".numberPhone");
-  let divBtn = document.querySelector(".container-btn");
+ 
+
+  if(event.target.matches(".user-id")){
+    let inner = document.querySelector(".nav_inner");
+
+    inner.classList.toggle("nav_inner-show")
+  }
 
   //They are the button that it will be used
   if (event.target.matches(".btn-update *")) {
-    name.setAttribute("contenteditable", true);
-    phone.setAttribute("contenteditable", true);
-    divBtn.innerHTML = `
-    <button class="btn-success"><i class="fa-solid fa-check"></i></button>
-    <button class="btn-failure"><i class="fa-sharp fa-solid fa-xmark"></i></button>`;
+
+    let dataNode = sliceAttribute(event.target);
 
     data = {
-      contentName: name.textContent,
-      contentPhone: phone.textContent,
+      contentName: dataNode[0].textContent,
+      contentPhone:dataNode[1].textContent,
     };
   }
 
   if (event.target.matches(".btn-delete *")) {
     //We delete a node del document we are using event delegation.
+    
+    let valueDivConten = valueDivContent(event.target);
+    let name = valueDivConten[0];    
+    let phone = valueDivConten[1];
+    let divBtn = valueDivConten[2];
+    let indexDiv = returnIndexDiv(name.parentNode)
+    
+    
+    let dataSucess = {
+      contentName: name.textContent,
+      indexDiv: indexDiv,
+      contentPhone: phone.textContent,
+    };
 
-    crudElection(event, name, phone);
+    fetch(`http://localhost:4000/contact/delete`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(dataSucess),
+    });
+
 
     let buttonParent = event.target.parentNode.parentNode;
     let parentDiv = buttonParent.parentNode.getAttribute("class");
@@ -47,10 +71,18 @@ document.addEventListener("click", (event) => {
   }
 
   if (event.target.matches(".btn-success *")) {
+
+    let valueDivConten = valueDivContent(event.target);
+    let name = valueDivConten[0];    
+    let phone = valueDivConten[1];
+    let divBtn = valueDivConten[2];
+    let indexDiv = returnIndexDiv(name.parentNode)
+
     changeContentBtn(name, phone, divBtn);
 
     let dataSucess = {
       contentName: name.textContent,
+      indexDiv: indexDiv,
       contentPhone: phone.textContent,
     };
 
@@ -62,9 +94,15 @@ document.addEventListener("click", (event) => {
       body: JSON.stringify(dataSucess),
     });
   }
+
   if (event.target.matches(".btn-failure *")) {
     let dataName = data.contentName;
     let dataPhone = data.contentPhone;
+
+    let valueDivConten = valueDivContent(event.target);
+    let name = valueDivConten[0];    
+    let phone = valueDivConten[1];
+    let divBtn = valueDivConten[2];
 
     name.textContent = dataName;
     phone.textContent = dataPhone;
@@ -76,16 +114,18 @@ document.addEventListener("click", (event) => {
 /*POST Block contact*/
 submit?.addEventListener("click", async (event) => {
   event.preventDefault();
-
+  
   let arrayInputText = Array.from(allInput).map((result) => result.value);
-
+  
   let [nameContact, phoneNumber] = arrayInputText;
-
+  
   allInput.forEach((result) => {
     result.value = "";
   });
-
+  
   try {
+    let getValues = await fetch("http://localhost:4000/contact/userContact");
+    let valueArray = await getValues.json();
     fetch("http://localhost:4000/contact", {
       method: "POST",
       headers: {
@@ -93,23 +133,23 @@ submit?.addEventListener("click", async (event) => {
       },
       body: JSON.stringify({
         nameContact: nameContact,
+        indexDiv: valueArray.length,
         phoneNumber: phoneNumber,
       }),
     });
-
+    
     //Each time that you send one contact, this will be redner whitin the node info-contact.
   } catch (error) {
     console.log(error);
   }
-
-  getFetchContact();
+  getFetchContact()
 });
 
 async function getFetchContact() {
   let getValues = await fetch("http://localhost:4000/contact/userContact");
-  let valueArray = await getValues.json();
+    let valueArray = await getValues.json();
+   printDivContact(valueArray);
 
-  printDivContact(valueArray);
 }
 
 function printDivContact(valueParse) {
@@ -117,10 +157,10 @@ function printDivContact(valueParse) {
     infoContact.innerHTML = "";
   }
 
-  valueParse.map((element, key) => {
+  valueParse.map((element) => {
     const li = document.createElement("div");
-    li.classList.add(`div-${key}`);
-
+    li.classList.add(`div-${element.div_content}`);
+    console.log(element)
     li.innerHTML = `<div class="nameContact">${element.nameContact}</div> 
     <div class="numberPhone">${element.phoneNumber}</div>
     <div class="container-btn">
@@ -163,36 +203,6 @@ function validNumberInput(event) {
   }
 }
 
-async function crudElection(event, name, phone) {
-  try {
-    let urlPart;
-    name = name.textContent;
-    phone = phone.textContent;
-
-    console.log(name, phone);
-
-    let data = {
-      nameContact: name,
-      phoneNumber: phone,
-    };
-
-    if (event.target.matches(".btn-update *")) {
-      urlPart = "update";
-    }
-    if (event.target.matches(".btn-delete *")) {
-      urlPart = "delete";
-    }
-    fetch(`http://localhost:4000/contact/${urlPart}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(data),
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 function changeContentBtn(name, phone, divBtn) {
   name.setAttribute("contenteditable", false);
@@ -201,4 +211,32 @@ function changeContentBtn(name, phone, divBtn) {
   divBtn.innerHTML = `
     <button class="btn-update"><i class="fa-solid fa-pen"></i></button>
     <button class="btn-delete"><i class="fa-solid fa-trash"></i></button> `;
+}
+function sliceAttribute(node){
+  let parentDiv = node.parentNode.parentNode.parentNode.children;
+  let sliceParentDivEdit = Array.from(parentDiv).slice(0,2)
+  let containerBtn = Array.from(parentDiv).slice(2,3)[0]
+  sliceParentDivEdit.forEach(element => {
+    element.setAttribute("contenteditable", true);
+  })
+
+  containerBtn.innerHTML = `
+     <button class="btn-success"><i class="fa-solid fa-check"></i></button>
+     <button class="btn-failure"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+  ` 
+
+  return sliceParentDivEdit;
+}
+
+function valueDivContent(node){
+
+  let parentDiv = node.parentNode.parentNode.parentNode.children;
+  let sliceParentDivEdit = Array.from(parentDiv)
+
+  return sliceParentDivEdit;
+}
+
+function returnIndexDiv(node){
+  let attribute = node.getAttribute("class");
+  return attribute.split("-")[1];
 }
