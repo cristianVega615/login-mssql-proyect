@@ -36,6 +36,9 @@ document.addEventListener("click", (event) => {
       contentName: dataNode[0].textContent,
       contentPhone:dataNode[1].textContent,
     };
+    dataNode[0].classList.add("border-edit")
+    dataNode[1].classList.add("border-edit")
+
   }
 
   if (event.target.matches(".btn-delete *")) {
@@ -66,13 +69,14 @@ document.addEventListener("click", (event) => {
     let buttonParent = event.target.parentNode.parentNode;
     let parentDiv = buttonParent.parentNode.getAttribute("class");
     let nodeChild = document.querySelector(`.${parentDiv}`);
-
+    
     buttonParent.parentNode.parentNode.removeChild(nodeChild);
   }
-
+  
   if (event.target.matches(".btn-success *")) {
-
-    let valueDivConten = valueDivContent(event.target);
+    let node = event.target
+    
+    let valueDivConten = valueDivContent(node);
     let name = valueDivConten[0];    
     let phone = valueDivConten[1];
     let divBtn = valueDivConten[2];
@@ -93,6 +97,11 @@ document.addEventListener("click", (event) => {
       },
       body: JSON.stringify(dataSucess),
     });
+
+    console.log(valueDivConten)    
+    name.classList.remove("border-edit")
+    phone.classList.remove("border-edit");
+
   }
 
   if (event.target.matches(".btn-failure *")) {
@@ -108,6 +117,10 @@ document.addEventListener("click", (event) => {
     phone.textContent = dataPhone;
 
     changeContentBtn(name, phone, divBtn);
+
+
+    name.classList.remove("border-edit");
+    phone.classList.remove("border-edit");
   }
 });
 

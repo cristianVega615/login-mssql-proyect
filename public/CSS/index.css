@@ -6,7 +6,7 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-  color: black;
+  color: white;
   text-decoration: none;
 }
 .nav_item {
@@ -38,6 +38,7 @@
 .nav_inner-show {
   opacity: 1;
   pointer-events: unset;
+  color: white;
 }
 .sign_out {
   border: none;
@@ -163,11 +164,56 @@
   margin-left: 3rem;
   border-radius: 30px;
   color: black;
+  text-decoration: none;
 }
 
-.fa-delete-left {
-  width: 3rem;
-  height: 1.7rem;
+.info-contact > div {
+  margin: 1rem;
+  height: max-content;
+  position: relative;
+}
+.nameContact{
+  font-size: 1.5rem;
+  font-weight: bold;
+  max-width: 12rem;
+}
+.numberPhone{
+  max-width: 12rem;
+  color: rgba(0, 0, 0, 0.614);
+}
+.numberPhone::before{
+  content: "   ";
+}
+.info-contact > div > *{
+  outline: none;
+  margin-bottom: 0.3rem;
+  text-decoration: none;
+}
+
+.fa-trash::before,
+.fa-pen::before,
+.fa-check::before,
+.fa-xmark::before{
+  color: white;
+  background-color: red;
+  padding: 10px;
+  border-radius: 5px;
+}
+.border-edit{
+  border-bottom: 1px solid black;
+}
+
+.fa-check::before{
+  background-color: greenyellow;
+}
+.container-btn {
+  margin-top: 0.5rem;
+  position: absolute;
+  top: 6px;
+  right: 0;
+}
+.container-btn > *{
+  border: none;
 }
 
 /*scroll edit*/

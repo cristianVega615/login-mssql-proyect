@@ -5,4 +5,9 @@
 }
 html {
   font-family: 'Open Sans', sans-serif;
+
+    background-image: url("../resources/pexels-ryan-holloway-427900.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
