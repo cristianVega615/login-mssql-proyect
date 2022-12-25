@@ -56,7 +56,7 @@ router.post("/update", async (req, res, next) => {
     let request = await BD.request();
     let idUser = req.user?.id;
 
-    request.query(`UPDATE contact SET nameContact='${contentName}', phoneNumber='${contentPhone}' WHERE id=${idUser} and div_content=${indexDiv}` , (err, result) => {
+    request.query(`UPDATE contact SET nameContact='${contentName}', phoneNumber='${contentPhone}' WHERE id=${idUser} and div_content='${indexDiv}'` , (err, result) => {
         if(err) {next(err)}
 
         res.status(200)

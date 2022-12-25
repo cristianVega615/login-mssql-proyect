@@ -81,7 +81,7 @@ document.addEventListener("click", (event) => {
     let phone = valueDivConten[1];
     let divBtn = valueDivConten[2];
     let indexDiv = returnIndexDiv(name.parentNode)
-
+    console.log(indexDiv)
     changeContentBtn(name, phone, divBtn);
 
     let dataSucess = {
@@ -97,8 +97,7 @@ document.addEventListener("click", (event) => {
       },
       body: JSON.stringify(dataSucess),
     });
-
-    console.log(valueDivConten)    
+  
     name.classList.remove("border-edit")
     phone.classList.remove("border-edit");
 
@@ -146,7 +145,7 @@ submit?.addEventListener("click", async (event) => {
       },
       body: JSON.stringify({
         nameContact: nameContact,
-        indexDiv: valueArray.length,
+        indexDiv: `contact-${crypto.randomUUID()}`,
         phoneNumber: phoneNumber,
       }),
     });
@@ -251,5 +250,5 @@ function valueDivContent(node){
 
 function returnIndexDiv(node){
   let attribute = node.getAttribute("class");
-  return attribute.split("-")[1];
+  return attribute.slice(4, attribute.length);
 }
