@@ -81,7 +81,7 @@ document.addEventListener("click", (event) => {
     let phone = valueDivConten[1];
     let divBtn = valueDivConten[2];
     let indexDiv = returnIndexDiv(name.parentNode)
-    console.log(indexDiv)
+
     changeContentBtn(name, phone, divBtn);
 
     let dataSucess = {
@@ -172,7 +172,7 @@ function printDivContact(valueParse) {
   valueParse.map((element) => {
     const li = document.createElement("div");
     li.classList.add(`div-${element.div_content}`);
-    console.log(element)
+
     li.innerHTML = `<div class="nameContact">${element.nameContact}</div> 
     <div class="numberPhone">${element.phoneNumber}</div>
     <div class="container-btn">
